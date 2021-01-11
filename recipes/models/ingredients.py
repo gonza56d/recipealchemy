@@ -13,7 +13,7 @@ class IngredientComposition(models.Model):
     """Representation of the amount of a specific ingredient that a recipe has."""
 
     ingredient = models.ForeignKey('Ingredient', on_delete=models.CASCADE, null=False)
-    recipe = models.ForeignKey('recipes.Recipe', on_delete=models.CASCADE, null=False)
+    recipe = models.ForeignKey('recipes.Recipe', on_delete=models.CASCADE, null=False, related_name='ingredients_list')
     quantity = models.DecimalField(max_digits=21, decimal_places=3, null=False, default=1)
 
     def save(self, *args, **kwargs):

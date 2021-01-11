@@ -5,13 +5,15 @@ from rest_framework import serializers
 
 # Project
 from api.recipes.serializers import IngredientCompositionSerializer
+from api.users.serializers import UserSerializer
 from recipes.models import Recipe
 
 
 class RecipeSerializer(serializers.ModelSerializer):
 
-    ingredients = IngredientCompositionSerializer(read_only=True, many=True)
+    user = UserSerializer(read_only=True, many=False)
+    ingredients_list = IngredientCompositionSerializer(read_only=True, many=True)
 
     class Meta:
         model = Recipe
-        fields = ['user', 'name', 'ingredients', 'created', 'modified']
+        fields = ['user', 'id', 'name', 'ingredients_list', 'created', 'modified']
