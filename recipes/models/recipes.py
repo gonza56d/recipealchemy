@@ -17,6 +17,9 @@ class Recipe(BaseModel):
                             help_text='Maximum 50 characters, only letters and numbers')
     ingredients = models.ManyToManyField('recipes.Ingredient', through='recipes.IngredientComposition')
 
+    def __str__(self):
+        return f'{self.name} por @{self.user}'
+
     def save(self, *args, **kwargs):
         self.name = self.name.lower()
         return super(Recipe, self).save(*args, **kwargs)

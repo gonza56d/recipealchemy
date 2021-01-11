@@ -20,7 +20,7 @@ class UserBackend(ModelBackend):
         if username is None or password is None:
             return
         try:
-            user = UserModel.default_manager.get(Q(username=username) | Q(email=username))
+            user = UserModel._default_manager.get(Q(username=username) | Q(email=username))
         except UserModel.DoesNotExist:
             UserModel().set_password(password)
         else:

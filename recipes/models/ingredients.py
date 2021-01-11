@@ -17,9 +17,12 @@ class IngredientComposition(models.Model):
     quantity = models.DecimalField(max_digits=21, decimal_places=3, null=False, default=1)
 
     def save(self, *args, **kwargs):
-        if self.quantity.to_python(self.quantity) <= 0:
+        if float(self.quantity) <= 0:
             raise ValidationError('Ingredient quantity cannot be equal or less than zero')
         return super(IngredientComposition, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.quantity} of {self.ingredient}'
 
 
 class Ingredient(BaseModel):
@@ -33,3 +36,6 @@ class Ingredient(BaseModel):
     def save(self, *args, **kwargs):
         self.name = self.name.lower()
         return super(Ingredient, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
