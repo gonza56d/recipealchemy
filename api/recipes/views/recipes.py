@@ -2,9 +2,10 @@
 
 # REST framework
 from rest_framework import viewsets
+from rest_framework.response import Response
 
 # Project
-from recipes.api.serializers import RecipeSerializer
+from api.recipes.serializers import RecipeSerializer
 from recipes.models import Recipe
 
 

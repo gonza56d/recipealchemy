@@ -4,7 +4,7 @@
 from rest_framework import serializers
 
 # Project
-from recipes.api.serializers import IngredientCompositionSerializer
+from api.recipes.serializers import IngredientCompositionSerializer
 from recipes.models import Recipe
 
 
