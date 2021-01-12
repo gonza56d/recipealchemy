@@ -5,6 +5,7 @@ from django.db import IntegrityError
 
 # REST framework
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 # Project
 from api.exceptions.client_errors import DuplicateObjectException, MethodNotAllowedException
@@ -16,6 +17,10 @@ class IngredientViewSet(viewsets.ModelViewSet):
 
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [IsAuthenticated()]
 
     def get_queryset(self):
         ingredient = self.request.query_params.get('ingredient', None)

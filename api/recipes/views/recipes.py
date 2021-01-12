@@ -2,10 +2,9 @@
 
 # REST framework
 from rest_framework import viewsets
-
-# Project
 from rest_framework.permissions import IsAuthenticated
 
+# Project
 from api.recipes.serializers import RecipeSerializer
 from recipes.models import Recipe
 
