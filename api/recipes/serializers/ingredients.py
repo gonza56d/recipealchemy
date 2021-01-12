@@ -11,13 +11,14 @@ class IngredientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ingredient
-        fields = ['name', 'created', 'modified']
+        fields = ['id', 'name', 'created', 'modified']
 
 
 class IngredientCompositionSerializer(serializers.HyperlinkedModelSerializer):
 
+    id = serializers.ReadOnlyField(source='ingredient.id')
     name = serializers.ReadOnlyField(source='ingredient.name')
 
     class Meta:
         model = IngredientComposition
-        fields = ['name', 'quantity']
+        fields = ['id', 'name', 'quantity']

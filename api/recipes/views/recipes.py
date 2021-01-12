@@ -1,8 +1,7 @@
-"""Recipe viewsets declaration."""
+"""Recipe views declaration."""
 
 # REST framework
 from rest_framework import viewsets
-from rest_framework.response import Response
 
 # Project
 from api.recipes.serializers import RecipeSerializer
@@ -20,5 +19,5 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if username is not None:
             self.queryset = self.queryset.filter(user__username=username.lower())
         if recipe is not None:
-            self.queryset = self.queryset.filter(name=recipe.lower())
+            self.queryset = self.queryset.filter(name__icontains=recipe)
         return self.queryset

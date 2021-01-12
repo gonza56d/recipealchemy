@@ -7,9 +7,10 @@ from django.urls import path, include
 from rest_framework import routers
 
 # Project
-from api.recipes.views import RecipeViewSet
+from api.recipes.views import IngredientViewSet, RecipeViewSet
 
 router = routers.SimpleRouter()
+router.register(r'ingredients', IngredientViewSet, basename='ingredients')
 router.register(r'recipes', RecipeViewSet, basename='recipes')
 
 urlpatterns = [
