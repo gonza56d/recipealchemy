@@ -20,6 +20,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
+    def create(self, request, *args, **kwargs):
+        # TODO
+        return super(RecipeViewSet, self).create(request, *args, **kwargs)
+
     def get_queryset(self):
         username = self.request.query_params.get('user', None)
         recipe = self.request.query_params.get('recipe', None)
