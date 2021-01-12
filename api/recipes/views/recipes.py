@@ -4,6 +4,8 @@
 from rest_framework import viewsets
 
 # Project
+from rest_framework.permissions import IsAuthenticated
+
 from api.recipes.serializers import RecipeSerializer
 from recipes.models import Recipe
 
@@ -12,6 +14,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
     def get_queryset(self):
         username = self.request.query_params.get('user', None)
