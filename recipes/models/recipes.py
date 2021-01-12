@@ -15,6 +15,7 @@ class Recipe(BaseModel):
     name_regex = RegexValidator(regex='[aA0-zZ9]', message='Only letters and numbers allowed')
     name = models.CharField(blank=False, max_length=50, validators=[name_regex],
                             help_text='Maximum 50 characters, only letters and numbers')
+    description = models.CharField(max_length=150, blank=False)
     ingredients = models.ManyToManyField('recipes.Ingredient', through='recipes.IngredientComposition')
 
     def __str__(self):
@@ -26,3 +27,14 @@ class Recipe(BaseModel):
 
     class Meta:
         unique_together = ['user', 'name']
+
+
+class RecipeStep(models.Model):
+
+    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE, null=False, related_name='steps')
+    step_number = models.PositiveIntegerField(null=False, default=1)
+    title = models.CharField(max_length=50, blank=False)
+    description = models.CharField(max_length=500, blank=False)
+
+    class Meta:
+        unique_together = [['recipe', 'step_number'], ['recipe', 'title']]

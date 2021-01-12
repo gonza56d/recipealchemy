@@ -1,2 +1,2 @@
 from .ingredients import Ingredient, IngredientComposition
-from .recipes import Recipe
+from .recipes import Recipe, RecipeStep

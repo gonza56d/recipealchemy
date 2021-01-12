@@ -15,6 +15,6 @@ class IngredientViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         ingredient = self.request.query_params.get('ingredient', None)
-        if ingredient is not None:
-            self.queryset = self.queryset.filter(name__icontains=ingredient)
+        if ingredient:
+            self.queryset = self.queryset.filter(name__icontains=ingredient.strip())
         return self.queryset
