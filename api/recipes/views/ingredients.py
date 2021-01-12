@@ -7,7 +7,7 @@ from django.db import IntegrityError
 from rest_framework import viewsets
 
 # Project
-from api.exceptions.client_errors import DuplicateObjectException
+from api.exceptions.client_errors import DuplicateObjectException, MethodNotAllowedException
 from api.recipes.serializers import IngredientSerializer
 from recipes.models import Ingredient
 
@@ -28,3 +28,6 @@ class IngredientViewSet(viewsets.ModelViewSet):
             return super(IngredientViewSet, self).create(request, *args, **kwargs)
         except IntegrityError:
             raise DuplicateObjectException
+
+    def update(self, request, *args, **kwargs):
+        raise MethodNotAllowedException
