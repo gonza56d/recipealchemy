@@ -31,3 +31,6 @@ class IngredientViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         raise MethodNotAllowedException
+
+    def destroy(self, request, *args, **kwargs):
+        raise MethodNotAllowedException
