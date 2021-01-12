@@ -1,4 +1,4 @@
-"""Ingredient views declaration."""
+"""Ingredient views implementation."""
 
 # Django
 from django.db import IntegrityError

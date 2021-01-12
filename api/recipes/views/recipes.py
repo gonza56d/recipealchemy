@@ -1,4 +1,4 @@
-"""Recipe views declaration."""
+"""Recipe views implementation."""
 
 # REST framework
 from rest_framework import viewsets
