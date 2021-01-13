@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% for resource in tree_model.resources %}
+        <div class="col-12">
+            <div class="row">
+                Resource: {{ resource.name }}
+            </div>
+            <div class="row">
+                Description: {{ resource.description }}
+            </div>
+            <div class="row">
+                URL: {{ resource.url }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
