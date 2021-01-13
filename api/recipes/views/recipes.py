@@ -21,7 +21,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
-        # TODO
+        serializer = self.serializer_class(data=request.data)
+        print(serializer)  # TODO
         return super(RecipeViewSet, self).create(request, *args, **kwargs)
 
     def get_queryset(self):
