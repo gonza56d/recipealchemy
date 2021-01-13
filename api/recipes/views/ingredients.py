@@ -21,6 +21,7 @@ class IngredientViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated()]
+        return []
 
     def get_queryset(self):
         ingredient = self.request.query_params.get('ingredient', None)

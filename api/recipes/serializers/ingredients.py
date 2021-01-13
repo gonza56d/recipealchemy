@@ -16,7 +16,7 @@ class IngredientSerializer(serializers.ModelSerializer):
 
 class IngredientCompositionSerializer(serializers.HyperlinkedModelSerializer):
 
-    id = serializers.ReadOnlyField(source='ingredient.id')
+    id = serializers.PrimaryKeyRelatedField(source='ingredient.id', queryset=Ingredient.objects.all())
     name = serializers.ReadOnlyField(source='ingredient.name')
 
     class Meta:
