@@ -16,6 +16,17 @@ class DuplicateObjectException(APIException):
     default_code = 'duplicate_object'
 
 
+class MissingFieldException(APIException):
+    """Return this when django.db.IntegrityError is raised."""
+
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = _('Missing a required field.')
+    default_code = 'required_field'
+
+    def __init__(self, field):
+        super().__init__(_(f'{field}: This field is required.'))
+
+
 class MethodNotAllowedException(APIException):
 
     status_code = status.HTTP_405_METHOD_NOT_ALLOWED

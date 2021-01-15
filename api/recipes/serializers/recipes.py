@@ -24,7 +24,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True, many=False)
     id = serializers.ReadOnlyField()
     ingredients_list = IngredientCompositionSerializer(read_only=True, many=True)
-    steps = RecipeStepSerializer(read_only=False, many=True, required=True)
+    steps = RecipeStepSerializer(read_only=True, many=True)
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user

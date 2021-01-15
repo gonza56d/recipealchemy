@@ -5,7 +5,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 # Project
-from api.recipes.serializers import RecipeSerializer
+from api.exceptions.client_errors import MissingFieldException
+from api.recipes.serializers import RecipeSerializer, RecipeStepSerializer, IngredientCompositionSerializer
 from recipes.models import Recipe
 
 
@@ -21,9 +22,16 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        print(serializer)  # TODO
-        return super(RecipeViewSet, self).create(request, *args, **kwargs)
+        try:
+            IngredientCompositionSerializer(data=request.data['ingredients_list'])
+        except KeyError:
+            raise MissingFieldException(field='ingredients_list')
+        try:
+            RecipeStepSerializer(data=request.data['steps'])
+        except KeyError:
+            raise MissingFieldException(field='setps')
+        self.serializer_class(data=request.data)
+        return super().create(request, *args, **kwargs)
 
     def get_queryset(self):
         username = self.request.query_params.get('user', None)
