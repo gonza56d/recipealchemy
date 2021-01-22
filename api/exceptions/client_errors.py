@@ -1,4 +1,4 @@
-"""Client side http error definitions."""
+"""Client side http error declarations."""
 
 # Django
 from django.utils.translation import gettext_lazy as _
@@ -28,6 +28,7 @@ class MissingFieldException(APIException):
 
 
 class MethodNotAllowedException(APIException):
+    """Return this when client tried to perform a method that is not allowed for the view."""
 
     status_code = status.HTTP_405_METHOD_NOT_ALLOWED
     default_detail = _('This method is disabled for this resource.')
