@@ -14,5 +14,14 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def create(self, request, *args, **kwargs):
+        raise MethodNotAllowedException
+
     def destroy(self, request, *args, **kwargs):
+        raise MethodNotAllowedException
+
+    def update(self, request, *args, **kwargs):
+        raise MethodNotAllowedException
+
+    def partial_update(self, request, *args, **kwargs):
         raise MethodNotAllowedException

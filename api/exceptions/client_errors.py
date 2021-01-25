@@ -16,6 +16,10 @@ class DuplicateObjectException(APIException):
     default_code = 'duplicate_object'
 
 
+class DuplicateUserException(DuplicateObjectException):
+    default_detail = _('Username and/or email already in use.')
+
+
 class MissingFieldException(APIException):
     """Return this when django.db.IntegrityError is raised."""
 
